@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<form id="changelist-search" method="get">
+<div><!-- DIV needed for valid HTML -->
+<label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
+<input type="text" size="40" name="q" value="" id="searchbar" autofocus="">
+<input type="submit" value="Найти">
+
+
+</div>
+</form>
+
+
+
+<form  method="post" novalidate>{% csrf_token %}
+
+<input type="hidden" name="name" class="vTextField" required id="id_name" value="{{ nomer }}">
+
+    {{ form }}
+    <p>Новая связь будет назначена со следующими документами:</p>
+    
+    <ul>{{ items|unordered_list }}</ul>
+    <input type="hidden" name="action" value="create_link" />
+    <input type="submit" name="apply" value="Сохранить" />
+</form>
+{% endblock %}

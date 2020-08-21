@@ -1,0 +1,104 @@
+{% extends "app/layout.html" %}
+
+
+{% block content %}
+
+<div class="jumbotron">
+        <h2>{{ year_id }}</h2>
+      
+	<div class="row">
+	<div class="col-md-4">
+        	  {% if vid_id == 0 %}
+			 <h2><a class="text-dark"  href="../1/{{ vid_del_id }}">Приказы</a></h2>   
+			{% endif %}
+			 {% if vid_id == 1 %}
+			 <h2><a class="text-danger"  href="../1/{{ vid_del_id }}">Приказы</a></h2>   		
+			{% endif %}		      	
+    	</div> 
+    	<div class="col-md-4">
+    	    {% if vid_id == 0 %}
+			 <h2><a class="text-danger"  href="../0/{{ vid_del_id }}">Распоряжение</a></h2>   
+			{% endif %}
+			 {% if vid_id == 1 %}
+			 <h2><a class="text-dark"  href="../0/{{ vid_del_id }}">Распоряжение</a></h2>   		
+			{% endif %}			
+        	     	
+    	</div>
+    	
+	</div>  
+ <div class="row">
+	<div class="col-md-4">
+        	  {% if vid_del_id == 0 %}
+			 <h2><a class="text-dark"  href="../{{ vid_id }}/1">ОД</a></h2>   
+			{% endif %}
+			 {% if vid_del_id == 1 %}
+			 <h2><a class="text-danger"  href="../{{ vid_id }}/1">ОД</a></h2>   		
+			{% endif %}		      	
+    </div> 
+    <div class="col-md-4">
+    	    {% if vid_del_id == 0 %}
+			 <h2><a class="text-danger"  href="../{{ vid_id }}/0">АХД</a></h2>   
+			{% endif %}
+			 {% if vid_del_id == 1 %}
+			 <h2><a class="text-dark"  href="../{{ vid_id }}/0">АХД</a></h2>   		
+			{% endif %}			
+        	     	
+    </div>
+    	
+	</div>
+ </div>   
+{% for npa in npas %}
+<div class="md-4">
+		<div class="small-12 column">
+			<div class="theorg" >Вид документа:		
+			{% if npa.vid == 0 %}
+			 Распоряжение
+			{% endif %}
+			 {% if npa.vid == 1 %}
+			 Приказы
+			{% endif %}			
+			 </div>
+			Статус: {% if npa.status == 1 %}
+			 Действующий
+			{% endif %}
+			 {% if npa.status == 0 %}
+			 Утратил силу
+			{% endif %}
+			</div>
+		<div class="small-4 column text-left">
+			<span class="orgnum">Номер № {{ npa.nomer }}{% if npa.vid_del == 0  %}/адм{% endif %} от {{ npa.date|date:"j E Y" }}</span>
+		<br>
+					</div>
+		<span class="npaname">
+			<div class="small-8 column">
+				Заголовок документа: <a href="../../../document/{{ npa.id }}">{{ npa.name }}</a>
+			</div>
+		</span>
+</div> 	
+<br>
+
+ {% endfor %} 
+    	
+<!--div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            Django gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://djangobook.com/django-tutorials/">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>The Python Package Index is a repository of software for the Python programming language.</p>
+        <p><a class="btn btn-default" href="https://pypi.org/">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Microsoft Azure</h2>
+        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
+        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+    </div>
+</div-->
+
+{% endblock %}
